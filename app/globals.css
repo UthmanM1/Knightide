@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Font stacks: system fallbacks by default so the project builds with zero
+  external network calls. For production, swap these for real webfonts —
+  see README.md "Fonts" section for the two-line next/font/google change
+  (Anton for --font-display, Inter for --font-sans) that matches the
+  original Knightide designs most closely.
+*/
+:root {
+  --font-display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #07090a;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.98;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest2 text-lime-500;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-lime-500;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold uppercase tracking-wide transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-lime-500 text-ink-950 hover:bg-lime-400;
+  }
+  .btn-secondary {
+    @apply btn border border-ink-600 bg-transparent text-mist-100 hover:border-mist-400;
+  }
+  .btn-amber {
+    @apply btn bg-amber-500 text-ink-950 hover:bg-amber-400;
+  }
+  .card {
+    @apply rounded-md border border-ink-600 bg-ink-800 p-6;
+  }
+  .section {
+    @apply px-6 py-20 sm:px-10 lg:px-16;
+  }
+  .section-inner {
+    @apply mx-auto max-w-content;
+  }
+  .check-item {
+    @apply flex gap-3 text-sm text-mist-300;
+  }
+  .placeholder-media {
+    @apply relative flex items-center justify-center overflow-hidden rounded-md border border-ink-600 bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900 text-center text-xs font-semibold uppercase tracking-widest2 text-mist-500;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(200, 243, 29, 0.10), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(217, 165, 90, 0.10), transparent 55%);
+  }
+}
+
+/* ── Accessibility: motion and member-chosen preferences ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+[data-reduced-motion="true"] *, [data-reduced-motion="true"] *::before, [data-reduced-motion="true"] *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+[data-high-contrast="true"] { --hc-text: #ffffff; }
+[data-high-contrast="true"] .text-mist-300, [data-high-contrast="true"] .text-mist-400, [data-high-contrast="true"] .text-mist-500 { color: #f4f7f5 !important; }
+[data-high-contrast="true"] .border-ink-600, [data-high-contrast="true"] .border-ink-700, [data-high-contrast="true"] .border-ink-800 { border-color: #7d8a82 !important; }
+[data-high-contrast="true"] :focus-visible { outline: 3px solid #ffffff !important; outline-offset: 2px; }
